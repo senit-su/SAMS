@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Attendance Management System (SAMS)</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Student Attendance Management System</h1>
+    <button id="logoutBtn" style="display:none;">Logout</button>
+  </header>
+
+  <!-- Login Section -->
+  <div class="container" id="loginContainer">
+    <h2>Teacher Login</h2>
+    <input type="text" id="username" placeholder="Username" />
+    <input type="password" id="password" placeholder="Password" />
+    <button onclick="login()">Login</button>
+    <p id="loginMessage" class="alert" style="display:none;"></p>
+  </div>
+
+  <!-- Main Section -->
+  <div class="container" id="mainContainer" style="display:none;">
+    <h2 id="dashboardTitle">Attendance Dashboard - SEC-3</h2>
+
+    <!-- Section Buttons -->
+    <div class="section-buttons">
+      <button onclick="loadStudents('SEC-1')">Load SEC-1 Students</button>
+      <button onclick="loadStudents('SEC-2')">Load SEC-2 Students</button>
+      <button onclick="loadStudents('SEC-3')">Load SEC-3 Students</button>
+    </div>
+
+    <br>
+    <div>
+      <button onclick="saveAttendance()">Save Attendance</button>
+      <button onclick="generateReport()">Generate Report</button>
+      <button onclick="exportCSV()">Export CSV</button>
+    </div>
+
+    <table id="attendanceTable">
+      <thead>
+        <tr>
+          <th>Student ID</th>
+          <th>Name</th>
+          <th>Present</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <div id="reportContainer"></div>
+  </div>
+
+  <script src="script.js"></script>
+   <script>
+    function handleLoadStudents(section) {
+      if (typeof window.loadStudents === "function") {
+        window.loadStudents(section);
+        document.getElementById("dashboardTitle").textContent =
+          "Attendance Dashboard - " + section;
+      } else {
+        alert("loadStudents function not found!");
+      }
+    }
+  </script>
+</body>
+</html>
